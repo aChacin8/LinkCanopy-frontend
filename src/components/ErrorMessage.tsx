@@ -1,9 +1,12 @@
+interface ErrorMessageProps {
+    children: React.ReactNode;
+}
 
-const ErrorMessage = ({children}) => {
+const ErrorMessage = ({children} : ErrorMessageProps) => {
   return (
-    <div>
+    <p className="text-red-500 text-sm mt-2 font-bold">
       {children}
-    </div>
+    </p>
   )
 }
 
