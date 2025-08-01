@@ -1,9 +1,40 @@
 import { NavLink } from "react-router"
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import type { RegisterFormData } from "../interfaces";
 import ErrorMessage from "../components/ErrorMessage";
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 const SignUp = () => {
-  const { register, watch, handleSubmit, formState: { errors } } = useForm()
+  const inicialValues: RegisterFormData = {
+    firstName: '',
+    lastName: '',
+    handle: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+    phone: ''
+  }
+
+  const { register, watch, handleSubmit, formState: { errors } } = useForm({ defaultValues: inicialValues });
+
+  const handleFormSubmit = async (data: RegisterFormData) => {    
+    try {
+      const res = await axios.post(`${API_URL}/api/auth/register`, data)
+
+      if (res.status === 201) {
+        alert("User created successfully");
+      }
+
+    } catch (error) {
+      console.error('Error en respuesta backend:', error.response.data);
+      alert(`Error: ${error.response.data.errors[0].msg}`);
+    }
+
+  }
+
+  const password = watch('password');
 
   return (
     <>
@@ -11,7 +42,7 @@ const SignUp = () => {
         <h1 className="text-lg font-bold dark:text-white">Create Account</h1>
         <form
           className="max-w-md mx-auto"
-          
+          onSubmit={handleSubmit(handleFormSubmit)}
         >
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 w-full mb-5 group">
@@ -110,10 +141,7 @@ const SignUp = () => {
               placeholder=" "
               {...register('confirm_password', {
                 required: "Password is required",
-                minLength: {
-                  value: 8,
-                  message: "Password must be at least 8 characters long"
-                },
+                validate: (input) => input === password || "Passwords do not match",
               })}
             />
             {errors.confirm_password && <ErrorMessage>{errors.confirm_password.message}</ErrorMessage>}
