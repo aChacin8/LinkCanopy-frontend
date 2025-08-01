@@ -1,11 +1,10 @@
 import { NavLink } from "react-router"
 import { useForm } from "react-hook-form";
-import axios, {isAxiosError} from "axios";
+import {isAxiosError} from "axios";
 import { toast } from "sonner";
 import type { RegisterFormData } from "../interfaces";
 import ErrorMessage from "../components/ErrorMessage";
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+import api from "../config/axios";
 
 const SignUp = () => {
   const inicialValues: RegisterFormData = {
@@ -22,7 +21,7 @@ const SignUp = () => {
 
   const handleFormSubmit = async (formData: RegisterFormData) => {    
     try {
-      const data = await axios.post(`${API_URL}/auth/register`, formData)
+      const data = await api.post(`/auth/register`, formData)
 
       if (data.status === 201) {
         toast.success('Event has been created')
