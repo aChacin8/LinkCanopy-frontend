@@ -4,7 +4,7 @@ const AuthLayout = () => {
     return (
         <>
             <div className='min-h-screen bg-gray-600'>
-                <div className='max-w-xs mx-auto pt-10 px-5'>
+                <div className='max-w-xs mx-auto px-5'>
                     <img src= '/logo.png' alt='Link Canopy Link'/>
                     <Outlet/>
                 </div>
