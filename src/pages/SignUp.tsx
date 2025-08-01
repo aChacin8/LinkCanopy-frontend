@@ -1,6 +1,7 @@
 import { NavLink } from "react-router"
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import axios, {isAxiosError} from "axios";
+import { toast } from "sonner";
 import type { RegisterFormData } from "../interfaces";
 import ErrorMessage from "../components/ErrorMessage";
 
@@ -19,17 +20,18 @@ const SignUp = () => {
 
   const { register, watch, handleSubmit, formState: { errors } } = useForm({ defaultValues: inicialValues });
 
-  const handleFormSubmit = async (data: RegisterFormData) => {    
+  const handleFormSubmit = async (formData: RegisterFormData) => {    
     try {
-      const res = await axios.post(`${API_URL}/api/auth/register`, data)
+      const data = await axios.post(`${API_URL}/auth/register`, formData)
 
-      if (res.status === 201) {
-        alert("User created successfully");
+      if (data.status === 201) {
+        toast.success('Event has been created')
       }
 
     } catch (error) {
-      console.error('Error en respuesta backend:', error.response.data);
-      alert(`Error: ${error.response.data.errors[0].msg}`);
+      if (isAxiosError (error) && error.response){
+        toast.error (`Error: ${error.response?.data.error}`);
+      }
     }
 
   }
