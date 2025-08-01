@@ -10,7 +10,7 @@ const AuthLayout = () => {
                     <Outlet/>
                 </div>
             </div>
-            <Toaster richColors  position="top-center" />
+            <Toaster richColors/>
         </>
     )
 }
