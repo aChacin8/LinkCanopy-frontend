@@ -2,9 +2,11 @@ import { useForm } from "react-hook-form";
 import { NavLink } from "react-router";
 import { toast } from "sonner";
 import { isAxiosError } from "axios";
+
 import type { LoginFormData } from "../interfaces";
 import api from "../config/axios";
 import ErrorMessage from "../components/ErrorMessage";
+import { setToken } from "../utils/tokenStorage";
 
 
 const Login = () => {
@@ -17,9 +19,10 @@ const Login = () => {
 
     const handleLogin = async (loginData : LoginFormData) => {
         try {
-            const data = await api.post('/auth/login', loginData);
-            if (data.status === 200){
+            const response = await api.post('/auth/login', loginData);
+            if (response.status === 200){
                 toast.success('Login succesful');
+                setToken(response.data);
             }
         } catch (error) {
             if (isAxiosError(error) && error.message){
