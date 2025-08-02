@@ -19,7 +19,7 @@ const SignUp = () => {
 
   const { register, watch, handleSubmit, formState: { errors } } = useForm({ defaultValues: inicialValues });
 
-  const handleFormSubmit = async (formData: RegisterFormData) => {    
+  const handleRegister = async (formData: RegisterFormData) => {    
     try {
       const data = await api.post(`/auth/register`, formData)
 
@@ -32,7 +32,6 @@ const SignUp = () => {
         toast.error (`Error: ${error.response?.data.error}`);
       }
     }
-
   }
 
   const password = watch('password');
@@ -43,7 +42,7 @@ const SignUp = () => {
         <h1 className="text-lg font-bold dark:text-white">Create Account</h1>
         <form
           className="max-w-md mx-auto"
-          onSubmit={handleSubmit(handleFormSubmit)}
+          onSubmit={handleSubmit(handleRegister)}
         >
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 w-full mb-5 group">
