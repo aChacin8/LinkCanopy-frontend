@@ -4,10 +4,13 @@ export interface IUser {
     lastName: string,
     phone: string,
     email: string,
-    password: string
 }
 
 export type RegisterFormData = Pick <IUser, 'handle' | 'firstName' | 'lastName' | 'phone'| 'email'> & {
-    password: string, 
+    password: string
     confirm_password: string   
 }
+
+export type LoginFormData = Pick <IUser, 'email'> & {
+    password: string
+};
