@@ -1,6 +1,6 @@
 import { NavLink } from "react-router"
 import { useForm } from "react-hook-form";
-import {isAxiosError} from "axios";
+import { isAxiosError } from "axios";
 import { toast } from "sonner";
 import type { RegisterFormData } from "../interfaces";
 import ErrorMessage from "../components/ErrorMessage";
@@ -19,7 +19,7 @@ const SignUp = () => {
 
   const { register, watch, handleSubmit, formState: { errors } } = useForm({ defaultValues: inicialValues });
 
-  const handleRegister = async (formData: RegisterFormData) => {    
+  const handleRegister = async (formData: RegisterFormData) => {
     try {
       const data = await api.post(`/auth/register`, formData)
 
@@ -28,8 +28,8 @@ const SignUp = () => {
       }
 
     } catch (error) {
-      if (isAxiosError (error) && error.response){
-        toast.error (`Error: ${error.response?.data.error}`);
+      if (isAxiosError(error) && error.response) {
+        toast.error(`Error: ${error.response?.data.error}`);
       }
     }
   }
@@ -38,10 +38,9 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="w-max mx-auto -ml-16 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-full max-w-xl lg:max-w-4xl mx-auto bg-white border border-gray-200 rounded-lg shadow-sm p-10 dark:bg-stone-700 dark:border-gray-700">
         <h1 className="text-lg font-bold dark:text-white">Create Account</h1>
         <form
-          className="max-w-md mx-auto"
           onSubmit={handleSubmit(handleRegister)}
         >
           <div className="grid md:grid-cols-2 md:gap-6">
