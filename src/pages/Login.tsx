@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { NavLink } from "react-router";
 import { toast } from "sonner";
 import { isAxiosError } from "axios";
+import { useNavigate } from "react-router";
 
 import type { LoginFormData } from "../interfaces";
 import api from "../config/axios";
@@ -16,6 +17,7 @@ const Login = () => {
     }
 
     const { register, handleSubmit, formState: { errors }} = useForm({defaultValues});
+    const navigate = useNavigate();
 
     const handleLogin = async (loginData : LoginFormData) => {
         try {
@@ -23,6 +25,7 @@ const Login = () => {
             if (response.status === 200){
                 toast.success('Login succesful');
                 setToken(response.data);
+                navigate('/app')
             }
         } catch (error) {
             if (isAxiosError(error) && error.message){
@@ -30,7 +33,7 @@ const Login = () => {
             }
         }
     }
-
+    
     return (
         <>
             <div className="w-full max-w-sm mx-auto p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-6 md:p-8 dark:bg-stone-700 dark:border-gray-700">

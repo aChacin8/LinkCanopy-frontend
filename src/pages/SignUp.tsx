@@ -2,6 +2,8 @@ import { NavLink } from "react-router"
 import { useForm } from "react-hook-form";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
+import { useNavigate } from "react-router";
+
 import type { RegisterFormData } from "../interfaces";
 import ErrorMessage from "../components/ErrorMessage";
 import api from "../config/axios";
@@ -18,6 +20,7 @@ const SignUp = () => {
   }
 
   const { register, watch, handleSubmit, formState: { errors } } = useForm({ defaultValues: inicialValues });
+  const navigate = useNavigate();
 
   const handleRegister = async (formData: RegisterFormData) => {
     try {
@@ -25,6 +28,7 @@ const SignUp = () => {
 
       if (data.status === 201) {
         toast.success('Event has been created')
+        navigate('/auth/login');
       }
 
     } catch (error) {
