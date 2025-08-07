@@ -4,7 +4,8 @@ export interface IUser {
     lastName: string,
     phone: string,
     email: string,
-    _id: string
+    _id: string,
+    description?: string
 }
 
 export type RegisterFormData = Pick <IUser, 'handle' | 'firstName' | 'lastName' | 'phone'| 'email'> & {
