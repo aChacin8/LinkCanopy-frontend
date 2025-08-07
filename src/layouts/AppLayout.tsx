@@ -1,8 +1,25 @@
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, useNavigate } from "react-router";
 import { Toaster } from "sonner";
+import { useQuery } from "@tanstack/react-query";
 import NavBar from "../components/NavBar";
+import { getUser } from "../requests/users";
 
 const AppLayout = () => {
+
+    const { data, isLoading, isError} = useQuery ({
+        queryFn: getUser,
+        queryKey: ['user'],
+        refetchOnWindowFocus: false,
+        retry: 2
+    })
+
+    const navigate = useNavigate();
+
+    if (isLoading) return <p>Loading...</p>;
+
+    if (isError) return navigate('/auth/login')
+    
+    console.log(data);     
     return (
         <>
             <header className="bg-stone-700 py-4 shadow-md">
