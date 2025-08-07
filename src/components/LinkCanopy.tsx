@@ -1,5 +1,4 @@
 import {  NavLink, Outlet } from "react-router";
-import { Toaster } from "sonner";
 
 import NavBar from "../components/NavBar";
 import type { IUser } from "../interfaces";
@@ -51,8 +50,6 @@ const LinkCanopy = ( { data } : LinkcanopyProps) => {
                     </div>
                 </main>
             </div>
-
-            <Toaster position="top-right" />
         </>
     )
 }

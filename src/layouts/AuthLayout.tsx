@@ -1,5 +1,4 @@
 import { Outlet } from "react-router";
-import { Toaster } from "sonner";
 
 const AuthLayout = () => {
     return (
@@ -10,7 +9,6 @@ const AuthLayout = () => {
                     <Outlet/>
                 </div>
             </div>
-            <Toaster richColors/>
         </>
     )
 }
