@@ -1,14 +1,33 @@
 import { useForm } from "react-hook-form"
+import { useQueryClient, useMutation } from "@tanstack/react-query"
+import { toast } from "sonner";
+
+import type { IUser, ProfileFormData } from "../interfaces";
+import { updateUser } from "../requests/users";
 
 const Profile = () => {
+  const queryClient = useQueryClient();
+  const data : IUser = queryClient.getQueryData(['user'])! 
+
   const { register, handleSubmit, formState: { errors } } = useForm({ defaultValues: {
-    handle: '',
-    description: '',
-    phone: ''
-  } })
+      handle: data.handle,
+      description: data.description,
+    } 
+  })
 
-  const handleProfile = () => {
+  const updateProfileMutation = useMutation ({
+    mutationFn: updateUser,
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    onSuccess: (data) => {
+      toast.success(data)
+      queryClient.invalidateQueries({queryKey: ['user']})
+    }
+  })
 
+  const handleProfile = (formData : ProfileFormData) => {
+    updateProfileMutation.mutate(formData)
   }
 
   return (
@@ -37,10 +56,9 @@ const Profile = () => {
           <textarea
             className="w-full p-2 border rounded"
             placeholder="Write a short description about yourself..."
-            {...register ('description', {
-              
-            })}
+            {...register ('description')}
           />
+          {errors.description && <p className="text-red-500 text-sm">{errors.description.message}</p>}
         </div>
 
         <div>
@@ -58,7 +76,7 @@ const Profile = () => {
             type="submit"
             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
           >
-            Guardar Cambios
+            Upload
           </button>
         </div>
       </form>
