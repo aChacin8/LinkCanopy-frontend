@@ -2,8 +2,8 @@ import { NavLink, useLocation, useNavigate} from 'react-router'
 import { Bookmark, User} from 'lucide-react'
 
 const tabs = [
-    { name: 'Links', href: '/admin', icon: Bookmark },
-    { name: 'Perfil', href: '/admin/profile', icon: User },
+    { name: 'Links', href: '/app', icon: Bookmark },
+    { name: 'Perfil', href: '/app/profile', icon: User },
 ]
 
 const classNames = (...classes: string[]) => {
