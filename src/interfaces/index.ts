@@ -16,3 +16,5 @@ export type RegisterFormData = Pick <IUser, 'handle' | 'firstName' | 'lastName' 
 export type LoginFormData = Pick <IUser, 'email'> & {
     password: string
 };
+
+export type ProfileFormData = Pick <IUser, 'handle' | 'description'>
