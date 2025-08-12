@@ -1,7 +1,9 @@
 import { useState } from "react"
+import { toast } from "sonner"
 
 import { social } from "../data/social"
 import LinkCanopyInput from "../components/LinkCanopyInput"
+import { isValidUrl } from "../utils"
 
 const LinkCanopy = () => {
   const [linksCanopy, setLinksCanopy] = useState (social)
@@ -18,10 +20,13 @@ const LinkCanopy = () => {
   const handleEnableLink = ( socialNetwork : string) => {
     const updatedLink = linksCanopy.map(link => {
                                           if (link.name === socialNetwork){
-                                            return {...link, enabled: !link.enabled}
-                                          } else {
-                                            return link
+                                            if (isValidUrl (link.url)){
+                                              return {...link, enabled: !link.enabled}
+                                            } else {
+                                              toast.error ('Invalid URL')
+                                            }
                                           }
+                                          return link
                                         })
     
     setLinksCanopy(updatedLink)
