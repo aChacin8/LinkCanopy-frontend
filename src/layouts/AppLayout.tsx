@@ -18,9 +18,7 @@ const AppLayout = () => {
     if (isLoading) return <p>Loading...</p>;
 
     if (isError) return navigate('/auth/login')
-    
-    console.log(data);     
-    
+        
     if (data) return <LinkCanopy data= { data }/>;
 };
 
