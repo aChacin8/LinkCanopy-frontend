@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 
 import { getUser } from "../requests/users";
-import LinkCanopy from "../components/LinkCanopy";
+import LinkCanopyComponent from "../components/LinkCanopyComponent";
 
 const AppLayout = () => {
 
@@ -19,7 +19,7 @@ const AppLayout = () => {
 
     if (isError) return navigate('/auth/login')
         
-    if (data) return <LinkCanopy data= { data }/>;
+    if (data) return <LinkCanopyComponent data= { data }/>;
 };
 
 export default AppLayout;
