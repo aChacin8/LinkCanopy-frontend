@@ -16,10 +16,13 @@ const LinkCanopy = () => {
   }
 
   const handleEnableLink = ( socialNetwork : string) => {
-    const updatedLink = linksCanopy.map(link => link.name === socialNetwork 
-                                          ? { ...link, enabled: !link.enabled} 
-                                          : link
-                                        )
+    const updatedLink = linksCanopy.map(link => {
+                                          if (link.name === socialNetwork){
+                                            return {...link, enabled: !link.enabled}
+                                          } else {
+                                            return link
+                                          }
+                                        })
     
     setLinksCanopy(updatedLink)
   }
