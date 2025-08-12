@@ -53,7 +53,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+    <div className="max-w-xl mx-auto mt-10 p-6 bg-stone-300 shadow-md rounded-lg">
       <h1 className="text-2xl font-bold mb-4">Profile</h1>
 
       <form 
