@@ -19,3 +19,13 @@ export type LoginFormData = Pick <IUser, 'email'> & {
 };
 
 export type ProfileFormData = Pick <IUser, 'handle' | 'description' >
+
+//---------------------------------------------------------------------------------
+export interface ISocialNetwork {
+    id: number,
+    name: string,
+    url: string,
+    enabled: boolean
+}
+
+export type LinksCanopy = Pick <ISocialNetwork, 'name' | 'url' | 'enabled'>
