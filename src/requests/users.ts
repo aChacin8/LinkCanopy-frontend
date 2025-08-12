@@ -24,3 +24,18 @@
             }
         }
     }
+
+    export const uploadImg = async (file : File) => {
+        const formData = new FormData ()
+        formData.append('file', file)
+        
+        try {
+            const response = await api.post ('/user/img', formData)
+            return response.data
+
+        } catch (error) {
+            if (isAxiosError(error) && error.response){
+                throw new Error(error.response.data.error)
+            }
+        }
+    }

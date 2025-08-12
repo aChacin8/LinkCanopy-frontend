@@ -3,7 +3,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query"
 import { toast } from "sonner";
 
 import type { IUser, ProfileFormData } from "../interfaces";
-import { updateUser } from "../requests/users";
+import { updateUser, uploadImg } from "../requests/users";
 
 const Profile = () => {
   const queryClient = useQueryClient();
@@ -25,6 +25,28 @@ const Profile = () => {
       queryClient.invalidateQueries({queryKey: ['user']})
     }
   })
+
+  const updloadImageMutation = useMutation ({
+    mutationFn: uploadImg,
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    onSuccess: (data) => {
+      console.log(data.img);
+      queryClient.setQueryData(['user'], (prevData : IUser) => {
+        return {
+          ...prevData,
+          img: data.img
+        }
+      })
+    } 
+  })
+
+    const handleImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target.files){      
+      updloadImageMutation.mutate(e.target.files[0]);
+    }
+  }
 
   const handleProfile = (formData : ProfileFormData) => {
     updateProfileMutation.mutate(formData)
@@ -62,13 +84,16 @@ const Profile = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Teléfono</label>
+          <label className="block text-sm font-medium text-gray-700">Image</label>
           <input
-            type="text"
-            name="phone"
+            id="image"
+            name="image"
+            type="file"
             className="mt-1 block w-full rounded-md border border-gray-300 p-2"
-            placeholder="Tu teléfono"
+            accept="image/*"
+            onChange={ handleImg }
           />
+          <p></p>
         </div>
 
         <div className="flex justify-end">
@@ -81,8 +106,6 @@ const Profile = () => {
         </div>
       </form>
     </div>
+  )}
 
-  )
-}
-
-export default Profile
+export default Profile;
