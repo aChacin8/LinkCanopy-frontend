@@ -35,7 +35,7 @@ const LinkCanopy = ( { data } : LinkcanopyProps) => {
                             target="_blank"
                             rel="noreferrer noopener"
                         >
-                            Visitar Mi Perfil: /{data.handle}
+                            My Profile: /{data.handle}
                         </NavLink>
                     </div>
 
@@ -45,7 +45,11 @@ const LinkCanopy = ( { data } : LinkcanopyProps) => {
                         </div>
 
                         <aside className="w-full md:w-96 bg-stone-200 px-5 py-10 rounded-xl shadow space-y-6">
-
+                            <p className="text-4xl text-center text-stone-700">{data.handle}</p>
+                            {data.img && 
+                                <img src= {data.img} alt= 'Image Profile' className="mx-auto max-w-[250px]"/>
+                            }
+                            <p className="text-1xl text-center text-stone-700">{data.description}</p>
                         </aside>
                     </div>
                 </main>
