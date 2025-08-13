@@ -1,14 +1,23 @@
 import {  NavLink, Outlet } from "react-router";
+import { useEffect, useState } from "react";
+
 
 import NavBar from "./NavBar";
-import type { IUser } from "../interfaces";
+import type { ISocialNetwork, IUser } from "../interfaces";
+import ShowLinks from "./ShowLinks";
 
 interface LinkCanopyComponentProps {
     data: IUser
 }
 
 const LinkCanopyComponent = ( { data } : LinkCanopyComponentProps) => {
-  return (
+    const [enabledLinks, setEnabledLinks] = useState<ISocialNetwork[]>(JSON.parse(data.links).filter((link : ISocialNetwork) => link.enabled))
+
+    useEffect(() => {
+        setEnabledLinks(JSON.parse(data.links).filter((link: ISocialNetwork)=> link.enabled))
+    }, [data])
+
+    return (
     <>
             <header className="bg-stone-700 py-4 shadow-md">
                 <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-4">
@@ -50,6 +59,12 @@ const LinkCanopyComponent = ( { data } : LinkCanopyComponentProps) => {
                                 <img src= {data.img} alt= 'Image Profile' className="mx-auto max-w-[250px]"/>
                             }
                             <p className="text-1xl text-center text-stone-700">{data.description}</p>
+
+                            <div className="mt-20 flex flex-col gap-5">
+                                {enabledLinks.map(link => (
+                                    <ShowLinks key={link.name} link = {link}/>
+                                ))}
+                            </div>
                         </aside>
                     </div>
                 </main>
