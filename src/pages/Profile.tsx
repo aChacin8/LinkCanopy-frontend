@@ -49,7 +49,11 @@ const Profile = () => {
   }
 
   const handleProfile = (formData : ProfileFormData) => {
-    updateProfileMutation.mutate(formData)
+    const user : IUser = queryClient.getQueryData(['user'])!
+    user.description = formData.description
+    user.handle = formData.handle
+
+    updateProfileMutation.mutate(user)
   }
 
   return (
@@ -99,7 +103,7 @@ const Profile = () => {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="px-4 py-2 bg-stone-600 text-white rounded hover:bg-stone-700"
           >
             Upload
           </button>
