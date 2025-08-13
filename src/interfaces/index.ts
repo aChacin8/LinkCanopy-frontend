@@ -6,7 +6,8 @@ export interface IUser {
     email: string,
     _id: string,
     description?: string
-    img: string
+    img: string,
+    links: string
 }
 
 export type RegisterFormData = Pick <IUser, 'handle' | 'firstName' | 'lastName' | 'phone'| 'email'> & {
