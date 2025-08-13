@@ -20,11 +20,8 @@ const NavBar = () => {
     }
     return (
         <nav >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="max-w-7xl mx-auto">
                 <div className="sm:hidden mb-4">
-                    <label htmlFor="tabs" className="sr-only">
-                    Select a tab
-                </label>
                     <select
                         name='tabs'
                         id='tabs'
