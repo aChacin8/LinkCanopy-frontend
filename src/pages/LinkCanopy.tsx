@@ -23,6 +23,7 @@ const LinkCanopy = () => {
     }
   })
 
+  //Add links
   useEffect (()=> {
     const updatedData = linksCanopy.map ( item => {
       const userLink = JSON.parse(user.links).find((link : ISocialNetwork )=> link.name === item.name)
@@ -32,6 +33,7 @@ const LinkCanopy = () => {
       return item
     })
     setLinksCanopy(updatedData)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleUrlChange = (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -39,21 +41,19 @@ const LinkCanopy = () => {
                                           ? {...link, url: e.target.value} 
                                           : link
                                         ) 
-    
     setLinksCanopy(updatedLink)
-
-    queryClient.setQueryData(['user'], (prevData: IUser) => {
-      return {
-        ...prevData,
-        links: JSON.stringify(updatedLink)
-      }
-    })
   }
 
+  //This is the links in DB
+  const links : ISocialNetwork [] = JSON.parse(user.links)
+  
+  //Function to use links
   const handleEnableLink = ( socialNetwork : string) => {
+    
+    //Check URL and Enabled activate or deactivate
     const updatedLink = linksCanopy.map(link => {
                                           if (link.name === socialNetwork){
-                                            if (isValidUrl (link.url)){
+                                            if (isValidUrl (link.url)){                                              
                                               return {...link, enabled: !link.enabled}
                                             } else {
                                               toast.error ('Invalid URL')
@@ -64,14 +64,48 @@ const LinkCanopy = () => {
     
     setLinksCanopy(updatedLink)
   
+    //This is a filter according to the changes made by the user
+    let updatedItems : ISocialNetwork [] = []
+
+    const selectedSocialMedia = updatedLink.find(link => link.name === socialNetwork)
+    if (selectedSocialMedia?.enabled){
+      const idLink = {
+        ...selectedSocialMedia, 
+        id: links.length + 1
+      }
+      
+      updatedItems = [
+        ...links,
+        idLink
+      ]
+    } else {
+      const updatedIndex = links.findIndex(link => link.name === socialNetwork)
+      updatedItems = links.map(link => {
+        if (link.name === socialNetwork){
+          return {
+            ...link,
+            id:0,
+            enabled: false
+          }
+        } else if (link.id > updatedIndex) {
+          return {
+            ...link,
+            id: link.id - 1
+          }
+        }else {
+          return link
+        }
+      })
+    }
+    
+    //Save Links Data
     queryClient.setQueryData(['user'], (prevData: IUser) => {
       return {
         ...prevData,
-        links: JSON.stringify(updatedLink)
+        links: JSON.stringify(updatedItems)
       }
     })
   }
-  
   
   return ( 
     <>
