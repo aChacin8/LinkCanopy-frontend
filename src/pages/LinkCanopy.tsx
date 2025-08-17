@@ -105,7 +105,7 @@ const LinkCanopy = () => {
             id: 0,
             enabled: false
           }
-        } else if (link.id > updatedIndex) {
+        } else if (link.id > updatedIndex && (updatedIndex !== 0 && link.id === 1)) {
           return {
             ...link,
             id: link.id - 1
@@ -139,7 +139,7 @@ const LinkCanopy = () => {
         <button
           type="submit"
           className="p-2 text-lg w-full bg-stone-600 text-white rounded hover:bg-stone-700"
-          onClick={() => updateLinkMutation.mutate(user)}
+          onClick={() => updateLinkMutation.mutate(queryClient.getQueryData(['user'])!)}
         >
           Save
         </button>
