@@ -2,6 +2,8 @@ import {  NavLink, Outlet } from "react-router";
 import { useEffect, useState } from "react";
 import { DndContext, type DragEndEvent, closestCenter } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy, arrayMove } from "@dnd-kit/sortable";
+import { useQueryClient } from "@tanstack/react-query";
+
 
 import NavBar from "./NavBar";
 import type { ISocialNetwork, IUser } from "../interfaces";
@@ -18,6 +20,8 @@ const LinkCanopyComponent = ( { data } : LinkCanopyComponentProps) => {
         setEnabledLinks(JSON.parse(data.links).filter((link: ISocialNetwork)=> link.enabled))
     }, [data])
 
+    const queryClient = useQueryClient()
+
     const handleDragEnd = (e: DragEndEvent) => {
         if (e.over && e.over.id){
             const prevIndex = enabledLinks.findIndex(link => link.id === e.active.id)
@@ -25,6 +29,18 @@ const LinkCanopyComponent = ( { data } : LinkCanopyComponentProps) => {
             const order = arrayMove(enabledLinks, prevIndex, newIndex)
             
             setEnabledLinks (order)
+            
+            const disableLinks = (JSON.parse(data.links).filter((link : ISocialNetwork) => !link.enabled))
+
+            const links = order.concat(disableLinks)
+
+            queryClient.setQueryData(['user'], (prevData : IUser) => {
+                return {
+                    ...prevData,
+                    links: JSON.stringify(links)
+                }
+            })
+
         }
     }
 
