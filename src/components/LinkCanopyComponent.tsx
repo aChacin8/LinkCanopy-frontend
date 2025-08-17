@@ -1,6 +1,7 @@
 import {  NavLink, Outlet } from "react-router";
 import { useEffect, useState } from "react";
-
+import { DndContext, type DragEndEvent, closestCenter } from "@dnd-kit/core";
+import { SortableContext, verticalListSortingStrategy, arrayMove } from "@dnd-kit/sortable";
 
 import NavBar from "./NavBar";
 import type { ISocialNetwork, IUser } from "../interfaces";
@@ -16,6 +17,16 @@ const LinkCanopyComponent = ( { data } : LinkCanopyComponentProps) => {
     useEffect(() => {
         setEnabledLinks(JSON.parse(data.links).filter((link: ISocialNetwork)=> link.enabled))
     }, [data])
+
+    const handleDragEnd = (e: DragEndEvent) => {
+        if (e.over && e.over.id){
+            const prevIndex = enabledLinks.findIndex(link => link.id === e.active.id)
+            const newIndex = enabledLinks.findIndex(link => link.id === e.over!.id)
+            const order = arrayMove(enabledLinks, prevIndex, newIndex)
+            
+            setEnabledLinks (order)
+        }
+    }
 
     return (
     <>
@@ -60,11 +71,22 @@ const LinkCanopyComponent = ( { data } : LinkCanopyComponentProps) => {
                             }
                             <p className="text-1xl text-center text-stone-700">{data.description}</p>
 
-                            <div className="mt-20 flex flex-col gap-5">
-                                {enabledLinks.map(link => (
-                                    <ShowLinks key={link.name} link = {link}/>
-                                ))}
-                            </div>
+                            <DndContext
+                                collisionDetection={closestCenter}
+                                onDragEnd={handleDragEnd}
+                            >
+                                <div className="mt-20 flex flex-col gap-5">
+                                    <SortableContext
+                                        items = {enabledLinks}
+                                        strategy={verticalListSortingStrategy}
+
+                                    >
+                                        {enabledLinks.map(link => (
+                                            <ShowLinks key={link.name} link = {link}/>
+                                        ))}
+                                    </SortableContext>
+                                </div>
+                            </DndContext>
                         </aside>
                     </div>
                 </main>
