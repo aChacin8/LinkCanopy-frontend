@@ -21,6 +21,8 @@ export type LoginFormData = Pick <IUser, 'email'> & {
 
 export type ProfileFormData = Pick <IUser, 'handle' | 'description' >
 
+export type UserHandle = Omit <IUser, 'email' | '_id' | 'phone' >
+
 //---------------------------------------------------------------------------------
 export interface ISocialNetwork {
     id: number,
