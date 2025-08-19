@@ -7,11 +7,14 @@ import LinkCanopy from "./pages/LinkCanopy";
 import Profile from "./pages/Profile";
 import Handle from "./pages/Handle";
 import NotFound404 from "./pages/NotFound404";
+import Home from "./pages/Home";
+
 
 const Router = () => {
   return ( 
     <BrowserRouter> 
       <Routes>
+        <Route path="/" element={<Home/>}/>
         <Route path='/auth' element={<AuthLayout />}>  
           <Route path= 'login' element= {<Login/>}/>
           <Route path= 'register' element= {<SignUp/>}/>
