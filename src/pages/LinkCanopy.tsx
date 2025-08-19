@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 import { social } from "../data/social"
 import LinkCanopyInput from "../components/LinkCanopyInput"
-import { isValidUrl } from "../utils"
+import { isValidUrl } from "../utils/validation"
 import { updateUser } from "../requests/users"
 import type { IUser, ISocialNetwork } from "../interfaces"
 
