@@ -67,7 +67,7 @@ const LinkCanopyComponent = ( { data } : LinkCanopyComponentProps) => {
                     <div className="flex justify-end">
                         <NavLink
                             className="font-bold text-stone-700 hover:underline text-2xl transition-colors"
-                            to={''}
+                            to={`/${data.handle}`}
                             target="_blank"
                             rel="noreferrer noopener"
                         >
