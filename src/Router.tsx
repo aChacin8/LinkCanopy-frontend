@@ -6,6 +6,7 @@ import AppLayout from "./layouts/AppLayout";
 import LinkCanopy from "./pages/LinkCanopy";
 import Profile from "./pages/Profile";
 import Handle from "./pages/Handle";
+import NotFound404 from "./pages/NotFound404";
 
 const Router = () => {
   return ( 
@@ -23,6 +24,10 @@ const Router = () => {
         
         <Route path= '/:handle' element={<AuthLayout />}>  
           <Route index={true} element= {<Handle/>}/>
+        </Route>
+
+        <Route path= '/error/404' element={<AuthLayout />}>  
+          <Route index={true} element= {<NotFound404/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
