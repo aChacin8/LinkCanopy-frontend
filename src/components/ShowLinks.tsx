@@ -31,7 +31,7 @@ const ShowLinks = ({ link }: IShowLinks) => {
                 style={{ backgroundImage: `url('/social/icon_${link.name}.svg')` }}
             >
             </div>
-            <a className="capitalize font-bold text-stone-700" href={link.url} >Visit My {link.name}</a>
+            <a className="capitalize font-bold text-stone-700" >Visit My {link.name}</a>
         </li>
     )
 }
