@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
 
 import { getUserByHandle } from "../requests/users";
-import HandleComponent from "../components/HandleComponent";
+import HandleComponent from "../components/handle/HandleComponent";
 
 const Handle = () => {
   const params = useParams();
