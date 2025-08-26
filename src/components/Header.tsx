@@ -11,7 +11,7 @@ const Header = () => {
             <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-4">
                 <div className="w-full lg:p-0 md:w-1/3">
                 <NavLink to={'/'}>
-                    <img src="/logo.png" className="w-32"  />
+                    <img src="/logo.png" className="w-32" alt="LinkCanopy Logo" />
                 </NavLink>
                 </div>
                 <nav className="flex gap-3 justify-center mt-4">
