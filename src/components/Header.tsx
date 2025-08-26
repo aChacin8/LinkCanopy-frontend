@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from "react-router"
 
-import AdminNavigation from "./nav/AdminNavigation"
-import HomeNavigation from "./nav/HomeNavigation"
+import LogoutButton from "./btn/LogoutButton"
+import HomeButton from "./btn/HomeButton"
 
 const Header = () => {
     const location = useLocation()
@@ -15,7 +15,7 @@ const Header = () => {
                 </NavLink>
                 </div>
                 <nav className="flex gap-3 justify-center mt-4">
-                    {location.pathname === '/' ? <HomeNavigation/> : <AdminNavigation/>}
+                    {location.pathname === '/' ? <HomeButton/> : <LogoutButton/>}
                 </nav>
             </div>
         </header>
