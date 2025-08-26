@@ -21,7 +21,7 @@ const ShowLinks = ({ link }: IShowLinks) => {
         <li 
             ref = { setNodeRef }
             style={ style }
-            className="bg-stone-200 px-5 py-2 flex items-center gap-5 rounded-lg"
+            className="bg-stone-200 border border-stone-300 shadow-md px-5 py-2 flex items-center gap-5 rounded-lg"
             {...attributes}
             {...listeners}
         >

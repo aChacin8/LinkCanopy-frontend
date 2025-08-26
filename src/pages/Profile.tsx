@@ -57,7 +57,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-stone-300 shadow-md rounded-lg">
+    <div className="max-w-xl mx-auto mt-10 p-6 bg-stone-200 shadow-md rounded-lg">
       <h1 className="text-2xl font-bold mb-4">Profile</h1>
 
       <form 
@@ -88,17 +88,30 @@ const Profile = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Image</label>
-          <input
-            id="image"
-            name="image"
-            type="file"
-            className="mt-1 block w-full rounded-md border border-gray-300 p-2"
-            accept="image/*"
-            onChange={ handleImg }
-          />
-          <p></p>
-        </div>
+  <label className="block text-sm font-medium text-gray-700 mb-1">Profile Image</label>
+
+  <div className="flex items-center space-x-4">
+    
+    
+    <div>
+      <label
+        htmlFor="image"
+        className="cursor-pointer inline-flex items-center px-4 py-2 rounded-md bg-gray-600 text-white text-sm font-semibold shadow-md hover:bg-stone-700 transition"
+      >
+        Upload New Image
+      </label>
+      <input
+        id="image"
+        name="image"
+        type="file"
+        className="hidden"
+        accept="image/*"
+        onChange={handleImg}
+      />
+      <p className="mt-1 text-xs text-gray-500">PNG, JPG up to 5MB</p>
+    </div>
+  </div>
+</div>
 
         <div className="flex justify-end">
           <button

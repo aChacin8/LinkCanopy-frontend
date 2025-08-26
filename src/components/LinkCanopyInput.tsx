@@ -8,7 +8,7 @@ interface LinkCanopyInputProps {
 
 const LinkCanopyInput = ({ link, handleUrlChange, handleEnableLink }: LinkCanopyInputProps) => {
     return (
-        <div className="bg-stone-300 shadow-sm p-3 flex items-center gap-3 rounded-md">
+        <div className="bg-stone-200 shadow-sm p-3 flex items-center gap-3 rounded-md">
             <div
                 className="w-12 h-12 bg-cover "
                 id="social_icon"
@@ -20,7 +20,7 @@ const LinkCanopyInput = ({ link, handleUrlChange, handleEnableLink }: LinkCanopy
                 value={link.url}
                 onChange={handleUrlChange}
                 name= {link.name}
-                className="bg-stone-300 flex-1 border border-stone-400 rounded-lg"
+                className="bg-stone-200 flex-1 border border-stone-100 rounded-lg"
             />
             <label className="relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" className="sr-only peer" checked={link.enabled} onChange={() => handleEnableLink(link.name)}  />

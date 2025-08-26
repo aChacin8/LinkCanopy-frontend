@@ -48,7 +48,7 @@ const LinkCanopyComponent = ({ data }: LinkCanopyComponentProps) => {
     return (
         <>
             <Header/>
-            <div className="bg-stone-400 min-h-screen py-10">
+            <div className="bg-stone-300 min-h-screen py-10">
                 <main className="mx-auto max-w-5xl px-4">
                     <NavBar />
                     <div className="flex justify-end">
@@ -67,7 +67,7 @@ const LinkCanopyComponent = ({ data }: LinkCanopyComponentProps) => {
                             <Outlet />
                         </div>
 
-                        <aside className="w-full md:w-96 bg-stone-300 px-5 py-10 rounded-xl shadow space-y-6">
+                        <aside className="w-full md:w-96 bg-stone-200 px-5 py-10 rounded-xl shadow space-y-6">
                             <p className="text-4xl text-center text-stone-700">{data.handle}</p>
                             {data.img &&
                                 <img src={data.img} alt='Image Profile' className="mx-auto max-w-[250px]" />
