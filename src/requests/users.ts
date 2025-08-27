@@ -49,3 +49,14 @@ export const getUserByHandle = async (handle : string) => {
         }
     }
 }
+
+export const getHandle = async (handle : string) => {
+    try {
+        const response = await api.post <string>('/search/handle', { handle })
+        return response.data
+    } catch (error) {
+        if (isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.error)
+        }
+    }
+}
