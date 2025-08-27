@@ -1,18 +1,19 @@
-import { NavLink } from "react-router"
+import { NavLink, useNavigate ,useLocation } from "react-router"
 import { useForm } from "react-hook-form";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
-import { useNavigate } from "react-router";
 
 import type { RegisterFormData } from "../interfaces";
 import ErrorMessage from "../components/ErrorMessage";
 import api from "../config/axios";
 
 const SignUp = () => {
+  const location = useLocation()
+
   const inicialValues: RegisterFormData = {
     firstName: '',
     lastName: '',
-    handle: '',
+    handle: location.state.handle ||'',
     email: '',
     password: '',
     confirm_password: '',
