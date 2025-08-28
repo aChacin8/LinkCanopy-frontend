@@ -1,4 +1,4 @@
-import type { ISocialNetwork, UserHandle } from "../interfaces"
+import type { ISocialNetwork, UserHandle } from "../../interfaces"
 
 type HandleComponentProps = {
     data: UserHandle
