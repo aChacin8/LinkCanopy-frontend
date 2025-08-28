@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 
 import { getUser } from "../requests/users";
@@ -13,11 +13,9 @@ const AppLayout = () => {
         retry: 2
     })
 
-    const navigate = useNavigate();
-
     if (isLoading) return <p>Loading...</p>;
 
-    if (isError) return navigate('/auth/login')
+    if (isError) return <NavLink to={'/auth/login'}/>
         
     if (data) return <LinkCanopyComponent data= { data }/>;
 };
