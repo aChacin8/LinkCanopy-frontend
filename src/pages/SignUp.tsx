@@ -8,17 +8,17 @@ import ErrorMessage from "../components/ErrorMessage";
 import api from "../config/axios";
 
 const SignUp = () => {
-  const location = useLocation()
+  const { state } = useLocation() as { state?: { handle?: string } };
 
-  const inicialValues: RegisterFormData = {
-    firstName: '',
-    lastName: '',
-    handle: location.state.handle ||'',
-    email: '',
-    password: '',
-    confirm_password: '',
-    phone: ''
-  }
+const inicialValues: RegisterFormData = {
+  firstName: '',
+  lastName: '',
+  handle: state?.handle ?? '',
+  email: '',
+  password: '',
+  confirm_password: '',
+  phone: ''
+}
 
   const { register, watch, handleSubmit, formState: { errors } } = useForm({ defaultValues: inicialValues });
   const navigate = useNavigate();
