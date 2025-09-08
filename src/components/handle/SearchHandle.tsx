@@ -55,22 +55,31 @@ const SearchHandle = () => {
                     Search
                 </button>
             </form>
-            <div className="flex-1 p-2 bg-stone-200 w-full mt-1 rounded-lg min-h-[50px] flex flex-col items-center justify-center">
-                    {searchMutation.isPending && (
-                        <p className="text-stone-500 ">Checking...</p>)
-                    }
-                    {searchMutation.isError && (
-                        <ErrorMessage>
-                            {(searchMutation.error as Error).message}
-                        </ErrorMessage>
-                    )}
-                    {searchMutation.data && (
-                        <p className="text-green-600">
-                            {searchMutation.data} is available! go to 
-                                <NavLink to={'/auth/register'} state={{handle: slugify(handle)}} className={'font-bold'}> Register</NavLink>
-                        </p>
-                    )}
-                </div>
+            {(searchMutation.isPending || searchMutation.isError || searchMutation.data) && (
+  <div className="flex-1 p-2 bg-stone-200 w-full mt-1 rounded-lg min-h-[50px] flex flex-col items-center justify-center">
+    {searchMutation.isPending && (
+      <p className="text-stone-500 ">Checking...</p>
+    )}
+    {searchMutation.isError && (
+      <ErrorMessage>
+        {(searchMutation.error as Error).message}
+      </ErrorMessage>
+    )}
+    {searchMutation.data && (
+      <p className="text-green-600">
+        {searchMutation.data}! go to 
+        <NavLink 
+          to={'/auth/register'} 
+          state={{handle: slugify(handle)}} 
+          className={'font-bold'}
+        >
+          {" "}Register
+        </NavLink>
+      </p>
+    )}
+  </div>
+)}
+
         </> 
     )
 }
